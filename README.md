@@ -82,3 +82,7 @@ differences are confined to three places:
 The best result came from full fine-tuning at a very small learning rate
 (2.3e-5), which is the principled way to run it: unfreeze everything, but nudge
 it gently.
+
+## WandB Report
+link to Part A: [](https://wandb.ai/parthd1901-bits-pilani/inaturalist-cnn)
+link to Part B: [](https://wandb.ai/parthd1901-bits-pilani/inaturalist-finetuned)
