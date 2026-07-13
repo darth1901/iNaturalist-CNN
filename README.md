@@ -84,5 +84,5 @@ The best result came from full fine-tuning at a very small learning rate
 it gently.
 
 ## WandB Report
-link to Part A: [](https://wandb.ai/parthd1901-bits-pilani/inaturalist-cnn)
-link to Part B: [](https://wandb.ai/parthd1901-bits-pilani/inaturalist-finetuned)
+- [Part A](https://wandb.ai/parthd1901-bits-pilani/inaturalist-cnn)
+- [Part B](https://wandb.ai/parthd1901-bits-pilani/inaturalist-finetuned)
