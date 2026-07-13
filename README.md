@@ -19,8 +19,7 @@ The gap between the two is a representation-quality gap rather than a tuning
 gap. A network trained from scratch on ~10K images cannot learn features that
 separate 10 broad, high-variance biological classes, and its accuracy saturates
 near 40% regardless of tuning. A pretrained backbone arrives with features
-already learned from 1.2M ImageNet images, so fine-tuning only has to adjust the
-final decision geometry.
+already learned from 1.2M ImageNet images.
 
 ## Repository structure
 
@@ -32,25 +31,6 @@ final decision geometry.
 │   └── finetune.ipynb       # pretrained ResNet50: freezing strategies, fine-tuning, test eval
 └── README.md
 ```
-
-## Setup
-
-Both notebooks are written to run top to bottom on a fresh Google Colab runtime
-with a GPU (Runtime > Change runtime type > GPU). No local setup is required.
-
-The dataset is downloaded into the session automatically:
-
-```python
-!wget -q https://storage.googleapis.com/wandb_datasets/nature_12K.zip
-!unzip -q nature_12K.zip
-```
-
-Note that the dataset's `val/` directory is used as the **test set**. The
-validation set is a stratified 20% split carved out of `train/`, so each of the
-10 classes is equally represented.
-
-Weights & Biases is used for experiment tracking. Run `wandb.login()` and supply
-your API key when prompted.
 
 ## Running Part A
 
@@ -83,7 +63,7 @@ wandb.agent(sweep_id, sweep_run, count=30)
 
 ## Running Part B
 
-`partB/finetune.ipynb` reuses the same data pipeline and training scaffold. The
+`partB/finetune.ipynb` reuses the same data pipeline and training scheme. The
 differences are confined to three places:
 
 - **`build_model`** loads `ResNet50_Weights.IMAGENET1K_V2` and replaces the
@@ -102,12 +82,3 @@ differences are confined to three places:
 The best result came from full fine-tuning at a very small learning rate
 (2.3e-5), which is the principled way to run it: unfreeze everything, but nudge
 it gently.
-
-## Notes
-
-- Model weights (`.pt`), the dataset, and local `wandb/` run directories are
-  gitignored. Retrain from the notebooks to reproduce.
-- Guided backpropagation is defined for ReLU networks. The Part A best model uses
-  GELU, so the guided rule is applied as a heuristic adaptation (masking on
-  positive GELU output). The images are guided-backprop-style rather than the
-  canonical algorithm, and the notebook says so.
